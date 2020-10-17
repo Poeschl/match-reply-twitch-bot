@@ -4,10 +4,10 @@ This is the bot which ist interaction automatically with Izzy's bot to farm star
 
 # Commands
 
-## `!bot start`
+## `!botstart`
 
 Starts the farming logic
 
-## `!bot stop`
+## `!botstop`
 
 Stops the farming

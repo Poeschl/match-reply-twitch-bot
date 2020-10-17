@@ -1,0 +1,2 @@
+twitchio==1.1.0
+PyYAML==5.3.1
