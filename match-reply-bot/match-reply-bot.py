@@ -1,12 +1,13 @@
 import logging
 
 import sys
+from regex import regex
 from twitchio.ext import commands
 
-from config import Config, IRC_TOKEN, CLIENT_ID, BOT_NAME, BOT_PREFIX, TARGET_CHANNEL, TARGET_BOT
+from config import Config, IRC_TOKEN, CLIENT_ID, BOT_NAME, BOT_PREFIX, TARGET_CHANNEL, TARGET_USER, RULES
 
 
-class IzzyBot(commands.Bot):
+class MatchReplyBot(commands.Bot):
 
     def __init__(self, config):
         super().__init__(
@@ -16,8 +17,9 @@ class IzzyBot(commands.Bot):
             prefix=config.get_config(BOT_PREFIX),
             initial_channels=[config.get_config(TARGET_CHANNEL)]
         )
-        self.target_bot = config.get_config(TARGET_BOT)
-        self.active = False
+        self.target_user = config.get_config(TARGET_USER)
+        self.rules = config.get_config(RULES)
+        self.active = True
 
     async def event_ready(self):
         print("Online....")
@@ -27,10 +29,11 @@ class IzzyBot(commands.Bot):
             # Commands only the the bot user
             await self.handle_commands(ctx)
 
-        if self.active and ctx.author.name.lower() == self.target_bot.lower():
-            # logic only for the targeted bot
-            if 'Gegner wieder verteilt'.lower() in ctx.content.lower():
-                await ctx.channel.send("!boss <Jarvis>")
+        if self.active and ctx.author.name.lower() == self.target_user.lower():
+            # reply logic only for the targeted user
+            for rule in self.rules:
+                if regex.search(rule.get('pattern'), ctx.content):
+                    await ctx.channel.send(rule.get('reply'))
 
     @commands.command(name='botstart')
     async def bot_start(self, ctx):
@@ -53,7 +56,7 @@ def main():
 
     config = Config()
 
-    bot = IzzyBot(config)
+    bot = MatchReplyBot(config)
     bot.run()
 
 

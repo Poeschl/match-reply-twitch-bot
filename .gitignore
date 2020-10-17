@@ -142,4 +142,4 @@ cython_debug/
 # Intellij IDEA settings
 .idea
 
-izzy-bot/config
+match-reply-bot/config

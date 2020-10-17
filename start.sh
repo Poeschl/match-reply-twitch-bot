@@ -8,4 +8,4 @@ pip3 install -r requirements.txt
 
 PYTHONPATH="$(printf "%s:" izzy-bot/)"
 export PYTHONPATH=$PYTHONPATH PYTHONUNBUFFERED=1
-python3 -u izzy-bot/izzy-bot.py
+python3 -u match-reply-bot/match-reply-bot.py

@@ -3,26 +3,26 @@ from os import path
 
 from yaml import SafeLoader, dump, load
 
-DEBUG = 'debug'
 IRC_TOKEN = 'irc_token'
 CLIENT_ID = 'client_id'
 BOT_NAME = 'bot_name'
 BOT_PREFIX = 'bot_prefix'
 TARGET_CHANNEL = 'target_channel'
-TARGET_BOT = 'target_bot'
+TARGET_USER = 'target_user'
+RULES = 'rules'
 
 DEFAULT_CONFIG_FOLDER = 'config'
 
 
 class Config:
     config_data = {
-        DEBUG: False,
         IRC_TOKEN: 'oauth:',
         CLIENT_ID: '',
         BOT_NAME: '',
         BOT_PREFIX: '!',
         TARGET_CHANNEL: '',
-        TARGET_BOT: 'myBot'
+        TARGET_USER: '',
+        RULES: [{"pattern": "Ping", "reply": "Pong"}]
     }
 
     def __init__(self):
