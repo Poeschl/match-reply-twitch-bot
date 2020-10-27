@@ -6,6 +6,5 @@ source venv/bin/activate
 
 pip3 install -r requirements.txt
 
-PYTHONPATH="$(printf "%s:" izzy-bot/)"
-export PYTHONPATH=$PYTHONPATH PYTHONUNBUFFERED=1
-python3 -u match-reply-bot/match-reply-bot.py
+export PYTHONUNBUFFERED=1
+exec python3 -u match-reply-bot/match-reply-bot.py
