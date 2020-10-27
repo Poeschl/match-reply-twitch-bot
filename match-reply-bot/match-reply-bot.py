@@ -1,6 +1,7 @@
 import logging
 
 import sys
+import time
 from regex import regex
 from twitchio.ext import commands
 
@@ -33,6 +34,7 @@ class MatchReplyBot(commands.Bot):
             # reply logic only for the targeted user
             for rule in self.rules:
                 if regex.search(rule.get('pattern'), ctx.content):
+                    time.sleep(0.5)
                     await ctx.channel.send(rule.get('reply'))
 
     @commands.command(name='botstart')
